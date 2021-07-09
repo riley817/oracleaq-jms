@@ -1,0 +1,27 @@
+---
+spring:
+  config:
+    activate:
+      on-profile: default
+
+# Spring Setting
+# Embedded server Setting
+server:
+  port: 8089
+
+# datasource Setting
+datasource:
+  queue:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    jdbc-url: jdbc:oracle:thin:@localhost:1521:xe
+    username: system
+    password: oracle
+    connection-timeout: 30000
+    idle-timeout: 600000
+    max-lifetime: 1800000
+    minimum-idle: 10 # same initial-size
+    maximum-pool-size: 10
+    pool-name: queue-cp
+    max-wait: 1000
+    initial-size: 10
+    connection-init-sql: /* TEST New Connection Pool Create */ SELECT 1
