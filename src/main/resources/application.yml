@@ -25,3 +25,7 @@ datasource:
     max-wait: 1000
     initial-size: 10
     connection-init-sql: /* TEST New Connection Pool Create */ SELECT 1
+
+oracle:
+  aq:
+    name: EVENT_EMPLOYEE_QUEUE

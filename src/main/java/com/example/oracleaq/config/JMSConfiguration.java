@@ -10,6 +10,7 @@ import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.destination.DestinationResolver;
+import org.springframework.jms.support.destination.DynamicDestinationResolver;
 
 import javax.jms.JMSException;
 import javax.jms.QueueConnectionFactory;
@@ -24,6 +25,11 @@ public class JMSConfiguration {
 
     @Qualifier("simpleDriverDataSource")
     private final DataSource dataSource;
+
+    @Bean
+    public DestinationResolver destinationResolver() {
+        return new DynamicDestinationResolver();
+    }
 
     @Bean(name = "jmsQueueConnectionFactory")
     public QueueConnectionFactory jmsQueueConnectionFactory() throws JMSException {

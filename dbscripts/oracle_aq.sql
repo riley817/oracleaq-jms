@@ -18,3 +18,18 @@ BEGIN
     );
 END;
 
+CREATE OR REPLACE PROCEDURE HR.PROC_ENQUEUE_MESSAGE ( v_message IN VARCHAR2)
+AS
+    enqueue_options    dbms_aq.enqueue_options_t;
+    message_properties dbms_aq.message_properties_t;
+    message_handle     RAW(16);
+    message            SYS.AQ$_JMS_TEXT_MESSAGE;
+BEGIN
+    message := sys.aq$_jms_text_message.construct;
+    message.set_text(v_message);
+    DBMS_AQ.ENQUEUE(
+            queue_name => 'HR.EVENT_EMPLOYEE_QUEUE',
+            enqueue_options    => enqueue_options,
+            message_properties => message_properties,
+);
+END;
